@@ -8,7 +8,7 @@ that showcases best practices of running microservices in Kubernetes.
 To install the chart with the release name `my-release`:
 
 ```console
-$ helm repo add sp https://ilyesAj.github.io/podinfo
+$ helm repo add sp https://stefanprodan.github.io/podinfo
 $ helm upgrade my-release --install sp/podinfo 
 ```
 
@@ -42,7 +42,7 @@ Parameter | Description | Default
 `hpa.requests` | target requests per second per pod | None
 `hpa.maxReplicas` | maximum pod replicas | `10`
 `image.pullPolicy` | image pull policy | `IfNotPresent`
-`image.repository` | image repository | `ilyesAj/podinfo`
+`image.repository` | image repository | `stefanprodan/podinfo`
 `image.tag` | image tag | `<VERSION>`
 `ingress.enabled` | enables ingress | `false`
 `ingress.annotations` | ingress annotations | None
