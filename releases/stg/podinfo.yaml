@@ -16,7 +16,7 @@ spec:
   values:
     image:
       repository: ilyesAj/podinfo
-      tag: stg-9ij63o4c
+      tag: stg-r6wt7pjv
     replicaCount: 2
     hpa:
       enabled: true
