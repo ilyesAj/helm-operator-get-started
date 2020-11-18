@@ -16,7 +16,7 @@ spec:
   values:
     image:
       repository: ilyesaj/podinfo
-      tag: dev-xb7qjqo1
+      tag: dev-wo72tahd
     replicaCount: 50
     hpa:
       enabled: false
