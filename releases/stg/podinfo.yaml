@@ -15,7 +15,7 @@ spec:
     ref: master
   values:
     image:
-      repository: ilyesAj/podinfo
+      repository: ilyesaj/podinfo
       tag: stg-r6wt7pjv
     replicaCount: 2
     hpa:

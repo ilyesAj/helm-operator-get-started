@@ -157,23 +157,23 @@ The *ci-mock.sh* script does the following:
 * builds a Docker image with the format: `yourname/podinfo:branch-sha`
 * pushes the image to Docker Hub
 
-Let's create an image corresponding to the `dev` branch (replace `ilyesAj` with your Docker Hub username):
+Let's create an image corresponding to the `dev` branch (replace `ilyesaj` with your Docker Hub username):
 
 ```
-$ cd hack && ./ci-mock.sh -r ilyesAj/podinfo -b dev
+$ cd hack && ./ci-mock.sh -r ilyesaj/podinfo -b dev
 
 Sending build context to Docker daemon  4.096kB
 Step 1/15 : FROM golang:1.13 as builder
 ....
 Step 9/15 : FROM alpine:3.10
 ....
-Step 12/15 : COPY --from=builder /go/src/github.com/ilyesAj/k8s-podinfo/podinfo .
+Step 12/15 : COPY --from=builder /go/src/github.com/ilyesaj/k8s-podinfo/podinfo .
 ....
 Step 15/15 : CMD ["./podinfo"]
 ....
 Successfully built 71bee4549fb2
-Successfully tagged ilyesAj/podinfo:dev-kb9lm91e
-The push refers to repository [docker.io/ilyesAj/podinfo]
+Successfully tagged ilyesaj/podinfo:dev-kb9lm91e
+The push refers to repository [docker.io/ilyesaj/podinfo]
 36ced78d2ca2: Pushed
 ```
 
@@ -198,7 +198,7 @@ spec:
     ref: master
   values:
     image:
-      repository: ilyesAj/podinfo
+      repository: ilyesaj/podinfo
       tag: dev-kb9lm91e
     replicaCount: 1
 ```
@@ -249,10 +249,10 @@ I would create a release candidate by merging the podinfo code from `dev` into t
 The CI would kick in and publish a new image:
 
 ```bash
-$ cd hack && ./ci-mock.sh -r ilyesAj/podinfo -b stg
+$ cd hack && ./ci-mock.sh -r ilyesaj/podinfo -b stg
 
-Successfully tagged ilyesAj/podinfo:stg-9ij63o4c
-The push refers to repository [docker.io/ilyesAj/podinfo]
+Successfully tagged ilyesaj/podinfo:stg-9ij63o4c
+The push refers to repository [docker.io/ilyesaj/podinfo]
 8f21c3669055: Pushed
 ```
 
@@ -276,7 +276,7 @@ spec:
     ref: master
   values:
     image:
-      repository: ilyesAj/podinfo
+      repository: ilyesaj/podinfo
       tag: stg-9ij63o4c
     replicaCount: 2
     hpa:
@@ -294,7 +294,7 @@ If I want to create a new environment, let's say for hotfixes testing, I would d
 * create a dir `releases/hotfix`
 * create a HelmRelease named `podinfo-hotfix`
 * set the automation filter to `glob:hotfix-*`
-* make the CI tooling publish images from my hotfix branch to `ilyesAj/podinfo:hotfix-sha`
+* make the CI tooling publish images from my hotfix branch to `ilyesaj/podinfo:hotfix-sha`
 
 ### Production promotions with sem ver
 
@@ -306,10 +306,10 @@ After merging `stg` into `master` via a pull request, I would cut a release by t
 When I push the git tag, the CI will publish a new image in the `repo/app:git_tag` format:
 
 ```bash
-$ cd hack && ./ci-mock.sh -r ilyesAj/podinfo -v 0.4.10
+$ cd hack && ./ci-mock.sh -r ilyesaj/podinfo -v 0.4.10
 
 Successfully built f176482168f8
-Successfully tagged ilyesAj/podinfo:0.4.10
+Successfully tagged ilyesaj/podinfo:0.4.10
 ```
 
 If I want to automate the production deployment based on version tags, I would use `semver` filters instead of `glob`:
@@ -331,7 +331,7 @@ spec:
     ref: master
   values:
     image:
-      repository: ilyesAj/podinfo
+      repository: ilyesaj/podinfo
       tag: 0.4.10
     replicaCount: 3
 ```
@@ -339,9 +339,9 @@ spec:
 Now if I release a new patch, let's say `0.4.11`, Flux will automatically deploy it.
 
 ```bash
-$ cd hack && ./ci-mock.sh -r ilyesAj/podinfo -v 0.4.11
+$ cd hack && ./ci-mock.sh -r ilyesaj/podinfo -v 0.4.11
 
-Successfully tagged ilyesAj/podinfo:0.4.11
+Successfully tagged ilyesaj/podinfo:0.4.11
 ```
 
 ![gitops-semver](https://github.com/stefanprodan/openfaas-flux/blob/master/docs/screens/flux-helm-semver.png)
